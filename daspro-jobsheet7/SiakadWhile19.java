@@ -9,7 +9,7 @@ public class SiakadWhile19 {
 
         while ( i < jml ) {
             System.out.print("Masukan nilai mahasiswa ke-" + (i+1) + ":");
-            nilai = sc.nextInt();
+            nilai = sc.next();
 
             if (nilai < 0 || nilai > 100) {
                 System.out.println("Nilai tidak valid. Masukan lagi nilai yang valid! ");
