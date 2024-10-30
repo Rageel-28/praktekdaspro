@@ -20,7 +20,7 @@ public class SearchNilai19 {
 
         for (int i=0; i<arrNilai.length; i++) {
             if (key ==arrNilai [i]) {
-                hasil = i;
+                hasil = i; 
                 break ;
             }
         }
