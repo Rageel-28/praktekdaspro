@@ -25,17 +25,22 @@ public class BioskopWithScanner19 {
                     sc.nextLine(); 
 
                     if (baris >= 1 && baris <= 4 && kolom >= 1 && kolom <= 2) {
-                        penonton[baris - 1][kolom - 1] = nama; 
-                        System.out.println("Data penonton berhasil disimpan!");
+                        // Memasukkan nama penonton ke dalam array
+                        if (penonton[baris - 1][kolom - 1] == null) {
+                            penonton[baris - 1][kolom - 1] = nama;
+                            System.out.println("Data penonton berhasil disimpan!");
+                        } else {
+                            System.out.println("Kursi pada baris " + baris + " dan kolom " + kolom + " sudah terisi.");
+                        }
                     } else {
-                        System.out.println("Posisi baris atau kolom tidak valid.");
+                        System.out.println("Posisi baris atau kolom tidak valid. Harus dalam rentang baris 1-4 dan kolom 1-2.");
                     }
                     break;
                 case 2 :
                     System.out.println("Daftar penonton : ");
                     for (int i= 0 ; i < penonton.length; i++) {
                         for (int j= 0 ; j < penonton[i].length; j++) {
-                            String penontonName = (penonton[i][j] !=null) ? penonton [i][j] : " - ";
+                            String penontonName = (penonton[i][j] !=null) ? penonton [i][j] : " ** ";
                             System.out.printf("Baris %d, Kolom %d: %s\n", i + 1, j + 1, penontonName);
                             
                         }
