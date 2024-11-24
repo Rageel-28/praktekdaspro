@@ -1,88 +1,85 @@
 import java.util.Scanner;
 
-public class tugas2{
-    // Fungsi untuk menginputkan nilai tugas
-    public static void inputNilaiTugas(int jumlahMahasiswa, int jumlahTugas, int[][] nilai) {
-        Scanner input = new Scanner(System.in);
+public class tugas2 {
 
-        for (int i = 0; i < jumlahMahasiswa; i++) {
-            System.out.println("Masukkan nilai untuk Mahasiswa " + (i + 1) + ":");
-            for (int j = 0; j < jumlahTugas; j++) {
-                System.out.print("Tugas " + (j + 1) + ": ");
-                nilai[i][j] = input.nextInt();
+    static Scanner input = new Scanner(System.in);
+
+    // Fungsi untuk menginputkan data penjualan
+    public static void inputDataPenjualan(int[][] penjualan) {
+        System.out.println("Masukkan data penjualan untuk 5 menu selama 7 hari:");
+        for (int i = 0; i < penjualan.length; i++) {
+            System.out.println("Masukkan penjualan untuk menu: " + getMenu(i));
+            for (int j = 0; j < penjualan[i].length; j++) {
+                System.out.print("Hari ke-" + (j + 1) + ": ");
+                penjualan[i][j] = input.nextInt();
             }
         }
     }
 
-    // Fungsi untuk menampilkan nilai tugas
-    public static void tampilkanNilaiTugas(int jumlahMahasiswa, int jumlahTugas, int[][] nilai) {
-        System.out.println("\nDaftar Nilai Mahasiswa:");
-        for (int i = 0; i < jumlahMahasiswa; i++) {
-            System.out.print("Mahasiswa " + (i + 1) + ": ");
-            for (int j = 0; j < jumlahTugas; j++) {
-                System.out.print(nilai[i][j] + " ");
+    // Fungsi untuk menampilkan seluruh data penjualan
+    public static void tampilkanDataPenjualan(int[][] penjualan) {
+        System.out.println("Rekap Penjualan Mingguan:");
+        System.out.print("\tHari ke-1\tHari ke-2\tHari ke-3\tHari ke-4\tHari ke-5\tHari ke-6\tHari ke-7\n");
+        
+        for (int i = 0; i < penjualan.length; i++) {
+            System.out.print(getMenu(i) + "\t");
+            for (int j = 0; j < penjualan[i].length; j++) {
+                System.out.print(penjualan[i][j] + "\t\t");
             }
             System.out.println();
         }
     }
 
-    // Fungsi untuk menampilkan rata-rata nilai per mahasiswa
-    public static void tampilkanRataRataMahasiswa(int jumlahMahasiswa, int jumlahTugas, int[][] nilai) {
-        for (int i = 0; i < jumlahMahasiswa; i++) {
-            int total = 0;
-            for (int j = 0; j < jumlahTugas; j++) {
-                total += nilai[i][j];
+    // Fungsi untuk menampilkan Menu yang memiliki penjualan tertinggi
+    public static void tampilkanMenuTertinggi(int[][] penjualan) {
+        int maxPenjualan = 0;
+        String menuTertinggi = "";
+        for (int i = 0; i < penjualan.length; i++) {
+            int totalPenjualan = 0;
+            for (int j = 0; j < penjualan[i].length; j++) {
+                totalPenjualan += penjualan[i][j];
             }
-            double rataRata = (double) total / jumlahTugas;
-            System.out.println("Rata-rata Mahasiswa " + (i + 1) + ": " + rataRata);
+            if (totalPenjualan > maxPenjualan) {
+                maxPenjualan = totalPenjualan;
+                menuTertinggi = getMenu(i);
+            }
+        }
+        System.out.println("\nMenu dengan penjualan tertinggi adalah: " + menuTertinggi);
+    }
+
+    // Fungsi untuk menampilkan rata-rata penjualan untuk setiap menu
+    public static void tampilkanRataRataPenjualan(int[][] penjualan) {
+        System.out.println("\nRata-rata penjualan per menu:");
+        for (int i = 0; i < penjualan.length; i++) {
+            int totalPenjualan = 0;
+            for (int j = 0; j < penjualan[i].length; j++) {
+                totalPenjualan += penjualan[i][j];
+            }
+            double rataRata = (double) totalPenjualan / penjualan[i].length;
+            System.out.println(getMenu(i) + ": " + rataRata);
         }
     }
 
-    // Fungsi untuk menampilkan tugas dengan nilai tertinggi
-    public static void tampilkanTugasTertinggi(int jumlahMahasiswa, int jumlahTugas, int[][] nilai) {
-        int[] totalTugas = new int[jumlahTugas];
-
-        // Menjumlahkan nilai tugas per tugas
-        for (int j = 0; j < jumlahTugas; j++) {
-            for (int i = 0; i < jumlahMahasiswa; i++) {
-                totalTugas[j] += nilai[i][j];
-            }
-        }
-
-        // Menemukan tugas dengan total nilai tertinggi
-        int tugasTertinggi = 0;
-        int maxTotal = totalTugas[0];
-        for (int j = 1; j < jumlahTugas; j++) {
-            if (totalTugas[j] > maxTotal) {
-                maxTotal = totalTugas[j];
-                tugasTertinggi = j;
-            }
-        }
-        System.out.println("\nTugas dengan nilai tertinggi adalah Tugas " + (tugasTertinggi + 1) + " dengan total nilai: " + maxTotal);
+    // Fungsi untuk mendapatkan nama menu berdasarkan index
+    public static String getMenu(int index) {
+        String[] menu = {"Kopi", "Teh", "Es Degan", "Roti Bakar", "Gorengan"};
+        return menu[index];
     }
 
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
+        // Array data penjualan: 5 menu dan 7 hari
+        int[][] penjualan = new int[5][7];
 
-        // Input jumlah mahasiswa dan jumlah tugas
-        System.out.print("Masukkan jumlah mahasiswa: ");
-        int jumlahMahasiswa = input.nextInt();
-        System.out.print("Masukkan jumlah tugas: ");
-        int jumlahTugas = input.nextInt();
+        // Menginputkan data penjualan
+        inputDataPenjualan(penjualan);
 
-        // Membuat array untuk menampung nilai mahasiswa
-        int[][] nilai = new int[jumlahMahasiswa][jumlahTugas];
+        // Menampilkan seluruh data penjualan
+        tampilkanDataPenjualan(penjualan);
 
-        // Menginputkan nilai tugas
-        inputNilaiTugas(jumlahMahasiswa, jumlahTugas, nilai);
+        // Menampilkan menu dengan penjualan tertinggi
+        tampilkanMenuTertinggi(penjualan);
 
-        // Menampilkan semua nilai tugas
-        tampilkanNilaiTugas(jumlahMahasiswa, jumlahTugas, nilai);
-
-        // Menampilkan rata-rata nilai per mahasiswa
-        tampilkanRataRataMahasiswa(jumlahMahasiswa, jumlahTugas, nilai);
-
-        // Menampilkan tugas dengan nilai tertinggi
-        tampilkanTugasTertinggi(jumlahMahasiswa, jumlahTugas, nilai);
+        // Menampilkan rata-rata penjualan untuk setiap menu
+        tampilkanRataRataPenjualan(penjualan);
     }
 }
