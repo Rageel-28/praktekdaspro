@@ -61,12 +61,12 @@ public class tugas2 {
     }
 
     // Fungsi untuk mendapatkan nama menu berdasarkan index
-    public static String getMenu(int index) {
+    public static String getMenu(int index)  {
         String[] menu = {"Kopi", "Teh", "Es Degan", "Roti Bakar", "Gorengan"};
         return menu[index];
     }
 
-    public static void main(String[] args) {
+        public static void main(String[] args) {
         // Array data penjualan: 5 menu dan 7 hari
         int[][] penjualan = new int[5][7];
 
